@@ -351,37 +351,5 @@ def poincare_simu(i):
 # In[67]:
 
 
-Parallel(n_jobs=4)(delayed(stat_RCP_process)(i) for i in np.arange(100))
-
-
-# In[68]:
-
-
-np.arange(100)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-updf = np.delete(up_entr, [0,1], axis=0)
-print(np.shape(updf))
-cons = updf[:,0]
-pred = updf[:,1]
-temp = updf[:,3]
-
-
-# In[65]:
-
-
-id="%03d" % 0
-# df = pd.DataFrame(np.transpose(updf))
-fnm = "poincare_section_tropical" + id + ".csv"
-# df.to_csv('poincare_section_tropical')
-fnm
+Parallel(n_jobs=4)(delayed(poincare_simu)(i) for i in np.arange(100))
 
