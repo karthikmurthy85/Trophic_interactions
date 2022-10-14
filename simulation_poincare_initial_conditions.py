@@ -350,6 +350,6 @@ def poincare_simu(i):
 
 # In[67]:
 
-
+from joblib import Parallel, delayed
 Parallel(n_jobs=4)(delayed(poincare_simu)(i) for i in np.arange(100))
 
