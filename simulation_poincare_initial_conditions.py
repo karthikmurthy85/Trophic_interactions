@@ -344,8 +344,10 @@ def poincare_simu(i):
     updf = np.delete(updf1, [0,1], axis=0)
     
     id="%03d" % i
+    df = pd.DataFrame(np.transpose(updf))
     fnm = "poincare_section_tropical" + id + ".csv"
     df.to_csv(fnm)
+    
 
 
 # In[67]:
