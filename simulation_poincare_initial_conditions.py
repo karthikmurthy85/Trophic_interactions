@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 # In[2]:
 
 
@@ -334,6 +331,7 @@ def poincare_simu(i):
     
     sol1 = solve_ivp (RCP_temp, t_span, v00[i], args = p, t_eval = tint, method= 'RK45', rtol=1e-12, atol=1e-12)
     
+       
     ssv0 = sol1.y[:,10:]
     tm = ssv0[3]; R0 = ssv0[0]; C0 = ssv0[1]; P0 = ssv0[2]
     thrsh1 = np.max(R0)*0.75 ##for poincare section in C,P plane
@@ -348,10 +346,9 @@ def poincare_simu(i):
     fnm = "poincare_section_tropical" + id + ".csv"
     df.to_csv(fnm)
     
-
-
-# In[67]:
-
+    ssdf = pd.DataFrame(np.transpose(sol1.y))
+    fnm1 = "tropical_statevariables" + id + ".csv"
+    ssdf.to_csv(fnm1)
+    
 from joblib import Parallel, delayed
-Parallel(n_jobs=4)(delayed(poincare_simu)(i) for i in np.arange(100))
-
+Parallel(n_jobs=2)(delayed(poincare_simu)(i) for i in np.arange(2))
